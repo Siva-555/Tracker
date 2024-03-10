@@ -1,9 +1,12 @@
 const comicModel = require("../model/comicModel");
 
 const createComic = async (req, res) => {
-  // console.log("create - req body", req.body);
   try {
-    const apiResponse = await comicModel.create(req.body);
+    const comic = new comicModel({
+      ...req.body,
+      imageUrl: req.file?.filename,
+    });
+    const apiResponse = await comic.save();
     res.status(201).json(apiResponse);
   } catch (err) {
     res.status(400).json({ message: err });
@@ -24,8 +27,11 @@ const updateComic = async (req, res) => {
   try {
     const apiResponse = await comicModel.findByIdAndUpdate(
       req.params.id,
-      req.body,
-      { new: true }
+      {
+        ...req.body,
+        imageUrl: req.file?.filename,
+      },
+      { new: true } // if true - returns the updated document
     );
     if (apiResponse) {
       res.status(200).json(apiResponse);
