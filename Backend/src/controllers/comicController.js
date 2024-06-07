@@ -1,3 +1,5 @@
+const fs = require("node:fs");
+
 const comicModel = require("../model/comicModel");
 
 const createComic = async (req, res) => {
@@ -25,6 +27,8 @@ const getAllComics = async (req, res) => {
 
 const updateComic = async (req, res) => {
   try {
+    const comicData = await comicModel.findById(req.params.id);
+
     const apiResponse = await comicModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -33,6 +37,21 @@ const updateComic = async (req, res) => {
       },
       { new: true } // if true - returns the updated document
     );
+
+    /**
+     * To delete the previous image file
+     */
+    if (req.file?.filename) {
+      let fileName = comicData.imageUrl;
+
+      fs.unlink(`uploads/${fileName}`, (err) => {
+        if (!err) {
+          console.log("successfully deleted");
+        }
+        console.log(err);
+      });
+    }
+
     if (apiResponse) {
       res.status(200).json(apiResponse);
     } else {
@@ -48,16 +67,21 @@ const deleteComic = async (req, res) => {
     const apiResponse = await comicModel.findByIdAndDelete(req.params.id);
     // console.log("delete", apiResponse);
     if (apiResponse) {
+      let fileName = apiResponse.imageUrl;
+
+      fs.unlink(`uploads/${fileName}`, (err) => {
+        if (!err) {
+          console.log("successfully deleted");
+        }
+        console.log(err);
+      });
+
       res.status(200).json(apiResponse);
     } else {
       res.status(404).json({ message: "data not found" });
     }
   } catch (err) {
-    if (err.name == "MongoServerError") {
-      res.status(500).json({ message: err });
-    } else {
-      res.status(400).json({ message: err });
-    }
+    res.status(400).json({ message: err });
   }
 };
 

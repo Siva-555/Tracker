@@ -8,7 +8,7 @@ const comicSchema = new Schema(
     category: { type: String, required: true },
     rating: { type: Number, default: -1 },
     status: { type: String, default: "" },
-    chapters: { type: Number, required: true },
+    chapters: { type: Number, default: 0 },
     description: { type: String, default: "" },
   },
   { timestamps: true }
