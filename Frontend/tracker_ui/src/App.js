@@ -11,17 +11,17 @@ function App() {
       style={{
         position: "relative",
         minHeight: "100vh",
-        backgroundColor: "#404040",
+        backgroundColor: "#100f0f",
       }}
     >
-      <Header />
+      {/* <Header /> */}
 
       <div style={{ height: "100%" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/comic" element={<ComicsPage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
