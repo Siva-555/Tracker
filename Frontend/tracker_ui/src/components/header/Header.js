@@ -4,7 +4,13 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 const Header = () => {
   return (
     <>
-      <Navbar className="" style={{ backgroundColor: "#111827" }}>
+      <Navbar
+        className=""
+        style={{
+          // backgroundColor: "#111827",
+          backgroundColor: "#000",
+        }}
+      >
         <Container>
           <Navbar.Brand className="fs-3" style={{ color: "white" }}>
             Tracker

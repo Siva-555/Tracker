@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import Header from "../components/header/Header";
 import { getAllComicsApi } from "../api/Api";
 import ComicsList from "../components/ComicsList";
 
@@ -17,7 +18,8 @@ const ComicsPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-auto">
+      <Header />
       <ComicsList />
     </div>
   );

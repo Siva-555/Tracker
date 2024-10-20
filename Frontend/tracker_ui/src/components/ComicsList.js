@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "antd";
+// import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { Tabs, Tab } from "@mui/material";
+import { Tabs, Tab, Button } from "@mui/material";
+import { Plus } from "lucide-react";
 
 import Comic from "./Comic";
 import {
@@ -47,14 +48,13 @@ const ComicsList = () => {
   };
   return (
     <div
-      className="container text-center"
+      className="container text-center mt-3"
       style={{
         width: "100%",
-        // maxWidth: "100%",
       }}
     >
       <div
-        className="row w-100 mt-3"
+        className="row w-100 "
         style={{
           color: "#fff",
           borderBottom: "1px solid #ffffff14",
@@ -78,8 +78,8 @@ const ComicsList = () => {
         </div>
         <div className="col-4 ">
           <Button
-            type="primary"
-            icon={<PlusOutlined />}
+            variant="contained"
+            startIcon={<Plus size={"18px"} />}
             style={{ float: "right", marginTop: "7px" }}
             onClick={() => setOpenSlider(true)}
           >
